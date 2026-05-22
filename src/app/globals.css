@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-card-back: var(--card-back);
+  --color-divider: var(--divider);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+:root {
+  --bg: #07040f;
+  --surface: #0f0a1e;
+  --surface-elevated: #150f2a;
+  --text: #e8e2f0;
+  --text-dim: #8a7ea8;
+  --accent: #d4a853;
+  --accent-dim: #7a5f2e;
+  --card-back: #1a0f35;
+  --divider: #1f1540;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), "Noto Sans SC", system-ui, sans-serif;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3D Card Flip */
+.card-flip {
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes card-appear {
+  from { opacity: 0; transform: translateY(48px) scale(0.88); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 168, 83, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(212, 168, 83, 0.25); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+.animate-soft-float {
+  animation: soft-float 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 168, 83, 0.08) 40%,
+    rgba(212, 168, 83, 0.15) 50%,
+    rgba(212, 168, 83, 0.08) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-card-appear {
+  animation: card-appear 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Staggered children helper */
+.stagger > * {
+  opacity: 0;
+  animation: fade-up 0.6s ease-out forwards;
+}
+.stagger > *:nth-child(1) { animation-delay: 0s; }
+.stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger > *:nth-child(3) { animation-delay: 0.2s; }
+.stagger > *:nth-child(4) { animation-delay: 0.3s; }
+.stagger > *:nth-child(5) { animation-delay: 0.4s; }
+.stagger > *:nth-child(6) { animation-delay: 0.5s; }
+.stagger > *:nth-child(7) { animation-delay: 0.6s; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(212, 168, 83, 0.25);
+  color: var(--text);
+}

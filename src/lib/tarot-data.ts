@@ -1,0 +1,316 @@
+export interface TarotCard {
+  id: number;
+  name: string;
+  nameEn: string;
+  type: "major" | "minor";
+  suit?: "wands" | "cups" | "swords" | "pentacles";
+  number?: number;
+  keywords: string[];
+  description: string;
+  upright: string;
+  reversed: string;
+}
+
+const majorArcana: TarotCard[] = [
+  {
+    id: 0,
+    name: "愚者",
+    nameEn: "The Fool",
+    type: "major",
+    keywords: ["新的开始", "自由", "冒险", "天真", "无限可能"],
+    description: "一个年轻人站在悬崖边，肩扛行囊，脚边有一只小白狗在吠叫。他仰望天空，似乎没有注意到前方的悬崖。阳光明媚，代表无限的希望与可能。",
+    upright: "新的旅程即将开始，你拥有一颗纯真的心和对未知的向往。不要害怕踏出第一步，即使是悬崖，宇宙也会为你搭桥。相信直觉，保持好奇心，人生最精彩的篇章正在展开。",
+    reversed: "你可能正在冲动行事，忽略了潜在的风险。也许是时候停下来想一想，这个决定是否经过深思熟虑。冒险固然可贵，但鲁莽会带来不必要的代价。",
+  },
+  {
+    id: 1,
+    name: "魔术师",
+    nameEn: "The Magician",
+    type: "major",
+    keywords: ["创造力", "技能", "意志力", "专注", "显化"],
+    description: "一位魔术师站在桌前，桌上摆放着圣杯、宝剑、权杖和星币——四元素的象征。他高举权杖指向天空，另一手指向大地，代表着'如其在上，如其在下'的法则。",
+    upright: "你拥有实现目标所需的一切资源。现在是将想法转化为行动的时刻。你的技能、智慧和意志力正处于巅峰状态。专注于你想要创造的，然后大胆去做——你比你以为的更有力量。",
+    reversed: "你可能在浪费自己的才能，或者正在使用力量去操控而非创造。检查一下：你是否在欺骗自己或他人？技能在，但方向可能偏了。回到初心，重新校准你的意图。",
+  },
+  {
+    id: 2,
+    name: "女祭司",
+    nameEn: "The High Priestess",
+    type: "major",
+    keywords: ["直觉", "潜意识", "智慧", "神秘", "内在认知"],
+    description: "一位庄严的女性坐在两柱之间——一黑一白，代表二元对立。她手中握着一卷经书，脚边有一弯新月。背后的帷幕遮挡了更深层的神秘领域。",
+    upright: "答案不在外面，在你的内心深处。静下来，倾听那个微小而清晰的声音。有些事情不是靠逻辑能解决的，你需要信任自己的直觉。这个阶段，等待和观察比行动更重要。",
+    reversed: "你可能正在忽视自己的直觉，或者内心被外界的声音淹没了。也有可能是你在隐藏真实的感受，不愿意面对某些真相。是时候重新建立与内在自我的连接了。",
+  },
+  {
+    id: 3,
+    name: "皇后",
+    nameEn: "The Empress",
+    type: "major",
+    keywords: ["丰饶", "滋养", "自然", "母性", "感官享受"],
+    description: "一位雍容华贵的女性坐在金色的麦田前，头戴星冠，身穿缀满花朵的长袍。她安详而温柔，周围是茂盛的森林和流淌的溪水。",
+    upright: "丰盛的季节来了。你种下的种子正在开花结果。允许自己享受生活的美好——美食、自然、爱与温暖。创造力在流动，关系在升温。给自己一些温柔的滋养，你值得被好好对待。",
+    reversed: "你可能在过度付出而忽略了自己，或者对他人过度依赖。创造力的枯竭感也许是因为你忘了滋养自己。先把自己的杯子倒满，再去浇灌别人。",
+  },
+  {
+    id: 4,
+    name: "皇帝",
+    nameEn: "The Emperor",
+    type: "major",
+    keywords: ["权威", "秩序", "结构", "掌控", "稳定"],
+    description: "一位威严的帝王端坐在石制王座上，身着盔甲，手持权杖。背后的山脉象征着他稳固不移的地位。他的眼神坚定而沉着。",
+    upright: "是时候建立秩序和边界了。你需要用理性来掌控局面，像一个CEO一样审视你的人生。制定计划，搭建结构，用纪律和坚持来达成目标。混乱不会自己消失，需要你来整顿。",
+    reversed: "你可能过于控制，或者是缺乏自律导致局面失控。检查一下：你是否在用权威压制他人？或者反过来说，你是否在面对权威时感到无力？真正的力量来自内心，不是外在的头衔。",
+  },
+  {
+    id: 5,
+    name: "教皇",
+    nameEn: "The Hierophant",
+    type: "major",
+    keywords: ["传统", "信仰", "导师", "仪式", "精神指引"],
+    description: "一位教皇坐在两根柱子之间，手持三重十字权杖。两位信徒跪在他面前，聆听教诲。他代表了传统智慧和精神传承。",
+    upright: "你需要一位导师，或者是向既有的知识体系学习的时候了。不必什么都要自己摸索，借鉴前辈的智慧会让你少走弯路。同时，某种仪式感或规律性的修行对你现在很重要。",
+    reversed: "你可能在挑战传统，或者被旧有的规则束缚得太紧了。叛逆本身没有错，但要搞清楚你是在反抗真正有问题的体系，还是单纯为了叛逆而叛逆。独立思考是好事，但不必拒绝所有帮助。",
+  },
+  {
+    id: 6,
+    name: "恋人",
+    nameEn: "The Lovers",
+    type: "major",
+    keywords: ["爱", "选择", "和谐", "关系", "价值观"],
+    description: "一对男女站在伊甸园中，上方是天使拉斐尔张开双臂祝福他们。男人看向女人，女人看向天使。背后的树上缠绕着蛇——选择与诱惑并存。",
+    upright: "一个重要的选择摆在面前。这不只是关于爱情——而是关于你内心价值观的抉择。什么对你来说真正重要？跟随内心，做出那个忠于自己的选择。真诚的连接、心灵的契合，正在靠近你。",
+    reversed: "你正在面临选择的困境，或者在自己的价值观和欲望之间挣扎。一段关系可能出现了失衡——沟通不畅、信任缺失。不要为了维持表面的和谐而牺牲真实的自我。",
+  },
+  {
+    id: 7,
+    name: "战车",
+    nameEn: "The Chariot",
+    type: "major",
+    keywords: ["胜利", "意志力", "决心", "前进", "征服"],
+    description: "一位战士驾驭着由黑白两只狮身人面兽拉动的战车。他没有用缰绳——完全靠意志力在控制方向。战车顶上的星空帷幕象征天佑。",
+    upright: "克服一切障碍的时刻到了。凭借坚定的意志和不懈的努力，你将取得胜利。内心的对立力量——理性与情感、勇气与恐惧——此刻被你驾驭，化为前进的动力。全力以赴，势不可挡。",
+    reversed: "你可能失去了方向感，或者内心的冲突正在阻碍你前进。拉战车的两只兽在往不同方向用力，结果就是原地踏步。先处理好内部的矛盾，再谈对外作战。",
+  },
+  {
+    id: 8,
+    name: "力量",
+    nameEn: "Strength",
+    type: "major",
+    keywords: ["勇气", "耐心", "内在力量", "温柔", "驯服"],
+    description: "一位温柔的女性正在轻抚一头狮子。她没有用暴力或铁链，仅凭温柔与耐心就驯服了这头猛兽。她头顶的无限符号代表无尽的内心力量。",
+    upright: "真正的力量不是征服，而是以柔克刚。你内心的勇气和耐心正在帮助你驯服生命中那些看似不可控的'猛兽'。温柔比强硬更有效。相信自己内在的韧性——你比你想象中更强大。",
+    reversed: "你可能在怀疑自己的力量，感到脆弱和不自信。也有可能是在用蛮力解决问题，而不是以柔克刚。暴躁和焦虑正在消耗你的能量。找回内心的平静，力量自然会回来。",
+  },
+  {
+    id: 9,
+    name: "隐士",
+    nameEn: "The Hermit",
+    type: "major",
+    keywords: ["内省", "独处", "智慧", "指引", "沉思"],
+    description: "一位老者站在雪山之巅，手持一盏灯——里面是六芒星的光芒。他拄着拐杖，孤独而安详。黑暗的背景中，他的灯光成为唯一的指引。",
+    upright: "需要从喧器的世界中抽离出来了。独处不是逃避，而是为了更深层的自我发现。你内心的那盏灯知道答案。找一个安静的空间，聆听内在的智慧。答案会在宁静中浮现。",
+    reversed: "你可能是被迫独处而感到孤独，或者反过来——你在用忙碌逃避自省。别害怕面对自己。孤独和孤单不同：前者是主动选择的修行，后者是被动的空虚。",
+  },
+  {
+    id: 10,
+    name: "命运之轮",
+    nameEn: "Wheel of Fortune",
+    type: "major",
+    keywords: ["转变", "命运", "周期", "机遇", "因果"],
+    description: "一个巨大的轮盘在旋转，上面有四个人物——上升者、下降者、坐于顶端者、坠于底部者。轮盘被命运之手推动，永不停歇。",
+    upright: "命运的齿轮正在转动，一个重要的转折点到了。好运正在靠近——但前提是你得准备好接收。这个变化可能来得突然，但它正是你需要经历的。顺势而为，不要逆天行事。",
+    reversed: "你可能正处在一个低谷期。但记住，命运之轮永远在转——低谷之后必然是上升。抗拒改变只会让情况更糟。接受这个周期，从中学习，为下一次上升做好准备。",
+  },
+  {
+    id: 11,
+    name: "正义",
+    nameEn: "Justice",
+    type: "major",
+    keywords: ["公正", "真相", "因果", "平衡", "责任"],
+    description: "一位庄严的法官端坐，一手持天平，一手持宝剑。天平代表权衡与公正，宝剑代表决断与真相。她的目光不偏不倚。",
+    upright: "真相即将被揭开，公正会得到伸张。你所种下的因，正在结出相应的果。做决定的时候到了——用理性而非情绪来权衡。对自己诚实，承担你应负的责任。",
+    reversed: "不公平的情况可能正在发生。也许有人在逃避责任，或者一个决定没有基于事实而是基于偏见。检查一下：你是否在某个问题上对自己不够诚实？逃避责任不会让问题消失。",
+  },
+  {
+    id: 12,
+    name: "倒吊人",
+    nameEn: "The Hanged Man",
+    type: "major",
+    keywords: ["牺牲", "放下", "新视角", "等待", "顺其自然"],
+    description: "一个人倒挂在T形十字架上，一只脚悬吊，另一只脚弯曲形成三角形。他的表情平静——他是自愿选择这个姿态的。头顶有光环，象征觉悟。",
+    upright: "换个角度看世界。当下可能有些停滞，但这正是你需要经历的阶段——停下来，换个视角，你会发现之前忽略的真相。有时候'不作为'反而是最大的作为。放手，让事情自然流淌。",
+    reversed: "你在抗拒必要的放手。你可能一直在做一些无谓的牺牲，或者为了避免改变而僵持在原地。拖延不会让选择变得更容易。问问自己：我到底在坚持什么？这个坚持还有意义吗？",
+  },
+  {
+    id: 13,
+    name: "死神",
+    nameEn: "Death",
+    type: "major",
+    keywords: ["结束", "转变", "重生", "放手", "净化"],
+    description: "一位黑甲骑士骑着白马缓缓前行，人们在他面前倒下——国王、主教、妇女、孩童，无一幸免。但背景中，太阳正在升起，预示着死亡之后必有新生。",
+    upright: "不要害怕——这张牌代表的不是肉体的死亡，而是旧有一切的终结。一段关系、一份工作、一个想法、一种生活方式，到了该结束的时候。放手并非失败，而是为了迎接新生的必要步骤。",
+    reversed: "你正在抗拒一个必要的结束。死守着已经不再适合你的事物，只会让自己越来越疲惫。改变是痛苦的，但不改变会更痛苦。勇敢面对终结，新生的机会就在后面等着你。",
+  },
+  {
+    id: 14,
+    name: "节制",
+    nameEn: "Temperance",
+    type: "major",
+    keywords: ["平衡", "适度", "调和", "耐心", "融合"],
+    description: "一位天使双手各持一金杯，正在将水从一个杯子倒入另一个。她一脚踏在水中，一脚踏在岸上，象征两个世界之间的调和。胸前的三角形代表平衡。",
+    upright: "寻找中道。极端不会解决问题，融合与调和才是答案。你正在学习如何平衡生活的不同面向——工作与休息、给予与接收、理性与情感。慢慢来，一切都恰到好处。",
+    reversed: "你的生活可能失去了平衡——过度工作、过度情绪化、或者对自己不够好。检查一下：哪些方面你需要适度收手？哪些方面你需要多投入一些？失衡久了，身体和心灵都会抗议。",
+  },
+  {
+    id: 15,
+    name: "恶魔",
+    nameEn: "The Devil",
+    type: "major",
+    keywords: ["束缚", "欲望", "执念", "物质主义", "阴影"],
+    description: "一个半人半兽的恶魔蹲坐在台座上，一男一女被锁链拴住却似乎并不挣扎。仔细看——锁链其实并不紧，他们随时可以挣脱，但选择了留下。",
+    upright: "什么东西在束缚你？也许是一段有毒的关系、一个成瘾的习惯、或是对金钱/权力的执念。但真相是：困住你的不是外物，而是你内心的恐惧和欲望。你一直都是自由的——只看你愿不愿意睁开眼看到这个事实。",
+    reversed: "你正在觉醒，开始意识到那些束缚你的东西。这是挣脱的关键时刻。承认自己被某些东西困住了——这需要巨大的勇气，但你已经迈出了第一步。继续往前走，光明就在前方。",
+  },
+  {
+    id: 16,
+    name: "高塔",
+    nameEn: "The Tower",
+    type: "major",
+    keywords: ["突变", "崩塌", "觉醒", "释放", "真相"],
+    description: "一座高塔被闪电击中，塔顶的王冠坠落，塔上的人跳向地面。火焰从窗户喷涌而出。天空中一片混沌——但这是必要的毁灭。",
+    upright: "你建立的一切正在崩塌——但请相信，这是宇宙在帮你推倒那些不牢固的结构。突然的改变虽然痛苦，但它让你看到了真相：有些东西早就该拆了。不要抗拒这场风暴，它会清扫你生命中不需要的一切。",
+    reversed: "你正在努力阻止一场不可避免的崩塌。也许你在粉饰太平，假装一切都好。但维持表面的稳定需要消耗巨大的能量。与其害怕崩塌，不如主动推倒重建。有些东西，你自己推倒比你被迫接受要好得多。",
+  },
+  {
+    id: 17,
+    name: "星星",
+    nameEn: "The Star",
+    type: "major",
+    keywords: ["希望", "疗愈", "灵感", "信心", "宁静"],
+    description: "一位裸体的女子跪在池塘边，一手将水倒入池中，一手将水洒向大地。天空中一颗巨大的八角星闪耀，周围点缀着七颗小星。远处有一只鸟在树上歌唱。",
+    upright: "风暴过后的宁静。你已经渡过了最艰难的时刻，现在可以疗愈、休整、重新出发了。希望就在前方，星星在为你指引方向。相信自己，相信宇宙的善意。这段时间适合做梦，也适合相信梦会成真。",
+    reversed: "你失去了信心和希望。也许经历了太多挫折，让你对美好的事物产生了怀疑。但星星依然在闪耀——只是乌云暂时遮住了它。试着重新建立与内心的连接，希望从未离开，是你暂时看不见。",
+  },
+  {
+    id: 18,
+    name: "月亮",
+    nameEn: "The Moon",
+    type: "major",
+    keywords: ["幻象", "恐惧", "潜意识", "迷茫", "梦境"],
+    description: "一弯巨大的月亮挂在夜空中，月光下一条路蜿蜒伸向远方。一只狗和一只狼在对着月亮嚎叫。水中有只龙虾正在爬出——代表深层的潜意识正在浮现。",
+    upright: "你正走在一条看不清前方的路上。有些事情让你感到不安或迷茫。不要害怕——月亮照亮的是你潜意识中一直被忽略的部分。直觉可能不太清晰，但它在。顺着这条路走下去，不要被表面的幻象吓倒。",
+    reversed: "恐惧和焦虑正在消散，真相开始浮出水面。那些困扰你的幻象正在失去力量。但也可能是你在逃避面对内心真实的恐惧——月光虽暗，却是发现真实自我的唯一途径。",
+  },
+  {
+    id: 19,
+    name: "太阳",
+    nameEn: "The Sun",
+    type: "major",
+    keywords: ["快乐", "成功", "活力", "光明", "童真"],
+    description: "一个孩子骑在白马上，张开双臂迎接阳光。背后是一片向日葵花田，巨大的太阳在天空中闪耀。孩子的笑容纯真无邪。",
+    upright: "这是塔罗中最积极的一张牌！光明、温暖、成功和快乐正在涌入你的生命。一切都在变好——关系、事业、健康、心态。像画中的孩子一样，纯粹地享受这一刻吧。你值得拥有这份幸福。",
+    reversed: "快乐可能暂时被遮挡了——也许你在压抑内心的童真，或者对成功缺乏信心。但太阳从不会真正消失，只是在云层后面。试着重新找到让你感到纯粹快乐的事物。",
+  },
+  {
+    id: 20,
+    name: "审判",
+    nameEn: "Judgment",
+    type: "major",
+    keywords: ["觉醒", "重生", "召唤", "评估", "释怀"],
+    description: "天使加百列吹响号角，墓中的人们从棺木中起身，张开双臂回应召唤。背景中碧海蓝天，象征着净化和重生。",
+    upright: "一个强烈的'觉醒'时刻。你被召唤去做一个更高层次的使命或选择。回顾过去，释怀遗憾，然后带着从中获得的智慧走向新的阶段。此刻，你听到了内心深处最为真实的召唤——回应它。",
+    reversed: "你在逃避某个重要的召唤或者自我评估。可能对自己太过苛刻，无法原谅过去的错误。也可能是害怕改变——但拖延只会让觉醒的过程更痛苦。听听那个声音吧，它在叫你放下包袱。",
+  },
+  {
+    id: 21,
+    name: "世界",
+    nameEn: "The World",
+    type: "major",
+    keywords: ["完成", "圆满", "成就", "整合", "旅行"],
+    description: "一位舞者在桂冠圈中翩翩起舞，四角各有一个形象——人、鹰、牛、狮，代表四元素与四方。她手持双杖，姿态优雅而圆满。",
+    upright: "一个重要的周期圆满了。你完成了一段漫长的旅程，现在正站在终点——也是新的起点。回顾这一路，你整合了生命中的各种经验，成为了更完整的人。庆祝吧，然后准备好迎接下一个轮回。",
+    reversed: "你接近成功了，但还有最后一步卡住了。也许是你对完成之后的状态感到不安——'完成之后是什么？'，或者还有一些收尾的工作你不愿意面对。别在终点线前停下，最后的冲刺才是关键。",
+  },
+];
+
+const minorArcana: TarotCard[] = [
+  // Wands 权杖 — 火元素，行动、激情、事业
+  { id: 22, name: "权杖王牌", nameEn: "Ace of Wands", type: "minor", suit: "wands", number: 1, keywords: ["灵感", "新机会", "激情", "创造性行动"], description: "一只从云中伸出的手握住一根发芽的权杖。", upright: "一个充满激情的全新开始。机会已经出现，抓住它。", reversed: "新计划可能延迟，或者缺乏足够的动力去执行。" },
+  { id: 23, name: "权杖二", nameEn: "Two of Wands", type: "minor", suit: "wands", number: 2, keywords: ["规划", "远见", "决策", "观望"], description: "一个人站在城堡高处，手持地球仪，望向远方。", upright: "你正在规划未来。大胆地构想，但别忘了落实第一步。", reversed: "对未来感到迷茫，或者在多个选项之间犹豫不决。" },
+  { id: 24, name: "权杖三", nameEn: "Three of Wands", type: "minor", suit: "wands", number: 3, keywords: ["扩张", "远航", "进展", "探索"], description: "一个人站在悬崖边，看着三根权杖和远处的船只。", upright: "你的计划已经开始起航。保持耐心，前方是广阔天地。", reversed: "进展可能不如预期，或者在等待结果时感到焦虑。" },
+  { id: 25, name: "权杖四", nameEn: "Four of Wands", type: "minor", suit: "wands", number: 4, keywords: ["庆祝", "稳定", "收获", "归属"], description: "四根权杖搭建的花棚下，人们欢庆跳舞。", upright: "一个值得庆祝的时刻——里程碑达成了，享受这片刻的安宁。", reversed: "庆典可能推迟，或者在新环境中缺乏归属感。" },
+  { id: 26, name: "权杖五", nameEn: "Five of Wands", type: "minor", suit: "wands", number: 5, keywords: ["竞争", "冲突", "挑战", "多样"], description: "五个人手持权杖互相较量，场面混乱但有生气。", upright: "竞争和挑战正在激荡出你的潜力。良性的冲突是成长的催化剂。", reversed: "冲突升级为内耗，或者你正在逃避必要的竞争。" },
+  { id: 27, name: "权杖六", nameEn: "Six of Wands", type: "minor", suit: "wands", number: 6, keywords: ["胜利", "认可", "自信", "凯旋"], description: "一位骑士头戴桂冠骑马归来，人群欢呼。", upright: "你的努力被认可了。享受胜利的时刻，这是你应得的。", reversed: "缺乏认可感，或者过于依赖外界的掌声来证明自己。" },
+  { id: 28, name: "权杖七", nameEn: "Seven of Wands", type: "minor", suit: "wands", number: 7, keywords: ["坚守", "勇气", "防守", "信念"], description: "一个人站在高处，用权杖对抗下方六根权杖的攻击。", upright: "守住你的立场。有人可能质疑你，但你需要坚持自己的信念。", reversed: "你快要撑不住了，可能需要重新评估是否值得坚持。" },
+  { id: 29, name: "权杖八", nameEn: "Eight of Wands", type: "minor", suit: "wands", number: 8, keywords: ["速度", "进展", "消息", "行动"], description: "八根权杖在空中飞驰，直朝目标而去。", upright: "事情正在快速推进。好消息在路上，准备好接收。", reversed: "事情受阻或延迟。可能需要重新审视方向再加速。" },
+  { id: 30, name: "权杖九", nameEn: "Nine of Wands", type: "minor", suit: "wands", number: 9, keywords: ["坚持", "韧性", "警戒", "疲惫"], description: "一个受伤的人拄着权杖，身后竖着八根权杖像栅栏。", upright: "你已经走了很长的路，虽然疲惫但不要放弃。最后的防线。", reversed: "过度防御，或者因为过去的创伤拒绝新的机会。" },
+  { id: 31, name: "权杖十", nameEn: "Ten of Wands", type: "minor", suit: "wands", number: 10, keywords: ["重负", "责任", "压力", "完成"], description: "一个人背着十根沉重的权杖，艰难前行。", upright: "你承担了太多责任。是时候审视哪些是可以放下的。", reversed: "过劳和压力已经到了临界点，必须做出取舍。" },
+  { id: 32, name: "权杖侍从", nameEn: "Page of Wands", type: "minor", suit: "wands", number: 11, keywords: ["探索", "热情", "新消息", "潜力"], description: "一个年轻人站立手持权杖，眼神充满好奇。", upright: "一个充满热情的新消息或新想法正在萌芽。勇敢去探索。", reversed: "热情的消退，或者一个新想法缺乏落地的计划。" },
+  { id: 33, name: "权杖骑士", nameEn: "Knight of Wands", type: "minor", suit: "wands", number: 12, keywords: ["行动", "冲动", "冒险", "激情"], description: "一位骑士骑马飞驰，手中的权杖燃着火焰。", upright: "充满能量和行动力。想做就去做，但注意别太冲动。", reversed: "热情来得快去得也快，或行动缺乏明确方向。" },
+  { id: 34, name: "权杖皇后", nameEn: "Queen of Wands", type: "minor", suit: "wands", number: 13, keywords: ["自信", "魅力", "领导力", "温暖"], description: "一位女王坐在宝座上，手持权杖和向日葵。", upright: "你散发着魅力和自信。用你的热情去感染和带领他人。", reversed: "自信变成了自负，或者过度付出导致精力枯竭。" },
+  { id: 35, name: "权杖国王", nameEn: "King of Wands", type: "minor", suit: "wands", number: 14, keywords: ["领导", "远见", "企业家精神", "果断"], description: "一位国王手握权杖，端坐在雕刻着火蜥蜴的宝座上。", upright: "你拥有强大的领导力和远见。大胆决策，带领团队前进。", reversed: "领导力被滥用，或者对自己设定的目标期望过高。" },
+
+  // Cups 圣杯 — 水元素，情感、关系、直觉
+  { id: 36, name: "圣杯王牌", nameEn: "Ace of Cups", type: "minor", suit: "cups", number: 1, keywords: ["新感情", "爱", "直觉", "丰盈"], description: "一只云中伸出的手托着溢出水流的圣杯，白鸽衔着圣饼。", upright: "新的感情或创造力的涌泉。敞开心扉，让爱流进来。", reversed: "情感的压抑或新的感情迟迟未能萌芽。" },
+  { id: 37, name: "圣杯二", nameEn: "Two of Cups", type: "minor", suit: "cups", number: 2, keywords: ["联结", "伙伴", "平等", "吸引"], description: "一男一女互相举杯，上方是双蛇缠绕的权杖。", upright: "一段美好的关系正在建立。平等、尊重、真诚的连接。", reversed: "关系中的失衡或沟通不畅，也可能是一段关系需要重新审视。" },
+  { id: 38, name: "圣杯三", nameEn: "Three of Cups", type: "minor", suit: "cups", number: 3, keywords: ["友谊", "庆祝", "欢聚", "分享"], description: "三位女子高举圣杯围成一圈欢快跳舞。", upright: "与朋友共度美好时光。合作和团体活动带来欢乐。", reversed: "社交过度或友谊关系出现问题，可能有人被排斥在外。" },
+  { id: 39, name: "圣杯四", nameEn: "Four of Cups", type: "minor", suit: "cups", number: 4, keywords: ["倦怠", "冥想", "不满", "沉思"], description: "一个人坐在树下交叉双臂，云中伸出一只手递来第四个圣杯。", upright: "你在对现状感到不满足。看看那只递给你新机会的手——别错过它。", reversed: "从倦怠中醒来，开始注意周围的机会。新的动力正在涌现。" },
+  { id: 40, name: "圣杯五", nameEn: "Five of Cups", type: "minor", suit: "cups", number: 5, keywords: ["失落", "遗憾", "悲伤", "聚焦阴影"], description: "一个人低头看着三个倒下的圣杯，身后还有两个圣杯站立但他没有注意到。", upright: "你在为失去的东西悲伤。但请转身看看——你还有两个满满的圣杯在身后。不要只看到失去的。", reversed: "从悲伤中走出来，开始看到希望。接受、原谅、然后前进。" },
+  { id: 41, name: "圣杯六", nameEn: "Six of Cups", type: "minor", suit: "cups", number: 6, keywords: ["回忆", "怀旧", "纯真", "赠予"], description: "一个孩子将装满鲜花的圣杯递给另一个孩子。", upright: "美好的回忆正在唤醒。也许你会收到一份意想不到的礼物。", reversed: "过度沉溺于过去，或者需要放下童年的某些执念。" },
+  { id: 42, name: "圣杯七", nameEn: "Seven of Cups", type: "minor", suit: "cups", number: 7, keywords: ["幻想", "选择", "诱惑", "白日梦"], description: "一个人面对七只漂浮的圣杯，每只中装着不同的幻象。", upright: "太多选择摆在你面前——但并非所有都是真实的。需要辨别什么是真机会，什么是幻象。", reversed: "从迷雾中看清了方向，开始做出务实的决定。" },
+  { id: 43, name: "圣杯八", nameEn: "Eight of Cups", type: "minor", suit: "cups", number: 8, keywords: ["离开", "寻找", "放弃", "更高的呼唤"], description: "一个人背着行囊离开身后堆叠整齐的八个圣杯，走向远方的山。", upright: "你已经拥有了不错的一切，但内心深处知道还有更大的追求。离开需要勇气，但留下只会更空虚。", reversed: "你不敢离开舒适区，尽管内心知道该走了。" },
+  { id: 44, name: "圣杯九", nameEn: "Nine of Cups", type: "minor", suit: "cups", number: 9, keywords: ["满足", "愿望达成", "幸福", "自豪"], description: "一个人坐在九个圣杯前，双臂交叉，得意地微笑。", upright: "愿望成真！这段时间你付出了努力，现在可以享受成果了。", reversed: "外在拥有一切但内心空虚，或者愿望实现了却不是你想要的。" },
+  { id: 45, name: "圣杯十", nameEn: "Ten of Cups", type: "minor", suit: "cups", number: 10, keywords: ["至福", "家庭", "圆满", "和谐"], description: "一对夫妻张开双臂，孩子们欢快跳舞，头顶上是十个圣杯形成的彩虹。", upright: "情感上的圆满和幸福。家庭和睦、关系和谐——这是真正的幸福。", reversed: "家庭关系可能存在问题，或者理想中的完美幸福可能与现实有差距。" },
+  { id: 46, name: "圣杯侍从", nameEn: "Page of Cups", type: "minor", suit: "cups", number: 11, keywords: ["创意", "直觉", "温柔", "艺术"], description: "一个少年手持圣杯，一条鱼从杯中探头而出。", upright: "一个充满创意和直觉的新消息。让内心的艺术家出来透透气。", reversed: "创意受阻，或情绪化过头影响判断。" },
+  { id: 47, name: "圣杯骑士", nameEn: "Knight of Cups", type: "minor", suit: "cups", number: 12, keywords: ["浪漫", "理想主义", "追求", "魅力"], description: "一位骑士骑白马缓缓前行，手持圣杯。", upright: "一段浪漫的追求或富有魅力的出现。带上你的理想主义去行动吧。", reversed: "过于理想化导致幻灭，或情感上不够成熟稳定。" },
+  { id: 48, name: "圣杯皇后", nameEn: "Queen of Cups", type: "minor", suit: "cups", number: 13, keywords: ["同理心", "直觉力", "关怀", "灵性"], description: "一位女王端坐，凝视手中精美的圣杯。", upright: "你拥有极强的直觉和同理心。信任你的情感智慧去关怀自己与他人。", reversed: "过于情绪化或过度共情导致自己精疲力竭。" },
+  { id: 49, name: "圣杯国王", nameEn: "King of Cups", type: "minor", suit: "cups", number: 14, keywords: ["情绪掌控", "智慧", "宽容", "治愈"], description: "一位国王端坐在海中的宝座上，手持圣杯和权杖。", upright: "你已经掌握了情绪的智慧。用你的成熟和包容去治愈和引领他人。", reversed: "情绪的失控或过度压抑，也可能是滥用情感操控他人。" },
+
+  // Swords 宝剑 — 风元素，思维、沟通、挑战
+  { id: 50, name: "宝剑王牌", nameEn: "Ace of Swords", type: "minor", suit: "swords", number: 1, keywords: ["真理", "清晰", "突破", "新思维"], description: "一只云中伸出的手高举一柄宝剑，剑尖顶着王冠。", upright: "一个清晰的真理或洞察正在浮现。思维的突破会带来行动的力量。", reversed: "思维混乱或真相被掩盖，需要更多信息才能做出判断。" },
+  { id: 51, name: "宝剑二", nameEn: "Two of Swords", type: "minor", suit: "swords", number: 2, keywords: ["僵局", "逃避", "两难", "蒙蔽"], description: "一位蒙眼女子交叉双臂握双剑，背后是平静的海面。", upright: "你正在逃避一个两难选择。但蒙住眼睛并不能让问题消失。", reversed: "终于要面对那个艰难的选择了。睁开眼睛，接受真相。" },
+  { id: 52, name: "宝剑三", nameEn: "Three of Swords", type: "minor", suit: "swords", number: 3, keywords: ["心痛", "背叛", "悲伤", "释放"], description: "三把剑刺穿一颗红心，背景是灰色的雨云。", upright: "心碎的时刻。一段痛苦但必要的经历。允许自己去感受这份悲伤。", reversed: "从伤痛中开始愈合，但可能还在回避真正面对那个伤口。" },
+  { id: 53, name: "宝剑四", nameEn: "Four of Swords", type: "minor", suit: "swords", number: 4, keywords: ["休息", "恢复", "冥想", "退隐"], description: "一个人躺在教堂中双手合十，墙上挂着三把剑，身边放着一把。", upright: "你需要休息——精神上的。给自己一个安静的空间来充电和反思。", reversed: "从休整中重新出发，或者反过来——你需要休息但一直在抗拒。" },
+  { id: 54, name: "宝剑五", nameEn: "Five of Swords", type: "minor", suit: "swords", number: 5, keywords: ["冲突", "胜负", "代价", "空洞胜利"], description: "一个人得意地收回三把剑，另外两人落寞离去。", upright: "你可能赢得了一场争论，但代价是破坏了关系。想想这个胜利值不值得。", reversed: "从冲突中脱身，或者愿意放下胜负心来和解。" },
+  { id: 55, name: "宝剑六", nameEn: "Six of Swords", type: "minor", suit: "swords", number: 6, keywords: ["过渡", "离开", "疗愈", "前行"], description: "一个人撑船载着一位裹袍女子和孩子，船上插着六把剑。", upright: "你正在从困境中慢慢驶出。前路虽陌生，但正在向更好的地方去。", reversed: "抗拒离开熟悉的困境，或者这个过渡比你预期的更困难。" },
+  { id: 56, name: "宝剑七", nameEn: "Seven of Swords", type: "minor", suit: "swords", number: 7, keywords: ["策略", "诡计", "隐瞒", "独行"], description: "一个人蹑手蹑脚偷走五把剑，身后还留着两把在地。", upright: "你需要策略而非蛮力。但小心，有些手段可能有损诚信。", reversed: "隐瞒之事即将暴露，或者你意识到了诚实的重要性。" },
+  { id: 57, name: "宝剑八", nameEn: "Eight of Swords", type: "minor", suit: "swords", number: 8, keywords: ["困境", "限制", "自我束缚", "无力感"], description: "一位女子被绑住、蒙眼，周围插着八把剑。但仔细看——她其实是可以挣脱的。", upright: "你觉得自己被困住了，但真正的束缚是内心的恐惧和限制性信念。", reversed: "正在从自我束缚中挣脱出来。你开始看到，那些限制大多是想象中的。" },
+  { id: 58, name: "宝剑九", nameEn: "Nine of Swords", type: "minor", suit: "swords", number: 9, keywords: ["焦虑", "失眠", "忧虑", "噩梦"], description: "一个人在深夜从床上坐起，掩面哭泣，墙上挂着九把剑。", upright: "焦虑和担忧正在吞噬你的夜晚。你需要明白——最坏的情况大多不会发生。", reversed: "从过度的焦虑中开始恢复，或者终于愿意和别人倾诉。" },
+  { id: 59, name: "宝剑十", nameEn: "Ten of Swords", type: "minor", suit: "swords", number: 10, keywords: ["终结", "触底", "背叛", "黎明"], description: "一个人背部被十把剑贯穿，趴在血泊中。但远方的天空正在亮起。", upright: "最坏的已经结束了——真的。虽然痛苦，但这是触底反弹的时刻。天快亮了。", reversed: "你快要从低谷中爬出来了。最艰难的部分已经过去。" },
+  { id: 60, name: "宝剑侍从", nameEn: "Page of Swords", type: "minor", suit: "swords", number: 11, keywords: ["好奇", "求知", "警觉", "沟通"], description: "一个少年高举宝剑，眼神警觉，风吹动他的头发。", upright: "对新知识的渴望和敏锐的观察力。现在是学习、收集信息的好时候。", reversed: "信息过载或沟通方式过于尖锐，伤害了他人。" },
+  { id: 61, name: "宝剑骑士", nameEn: "Knight of Swords", type: "minor", suit: "swords", number: 12, keywords: ["迅速", "决断", "冲动", "勇敢"], description: "一位骑士全力冲刺，高举宝剑迎风前行。", upright: "快速思考和果断行动的时刻。但注意——快不等于鲁莽。", reversed: "过于急躁导致失误，或者言语上的攻击性伤害了别人。" },
+  { id: 62, name: "宝剑皇后", nameEn: "Queen of Swords", type: "minor", suit: "swords", number: 13, keywords: ["理智", "独立", "清晰", "界限"], description: "一位女王端坐，一手持剑，一手伸向前方。", upright: "你拥有清晰的思维和独立的判断力。现在是建立边界、用理智决策的时刻。", reversed: "过于冷漠或理智过头，忽略了情感的重要性。" },
+  { id: 63, name: "宝剑国王", nameEn: "King of Swords", type: "minor", suit: "swords", number: 14, keywords: ["权威", "分析", "公正", "智慧"], description: "一位国王端坐，手握垂直的宝剑，目光理智从容。", upright: "以冷静的头脑和公正的分析来解决问题。你的经验和智慧值得信赖。", reversed: "权力滥用或过于理性冷酷，忽略了人情的温度。" },
+
+  // Pentacles 星币 — 土元素，财富、物质、安全
+  { id: 64, name: "星币王牌", nameEn: "Ace of Pentacles", type: "minor", suit: "pentacles", number: 1, keywords: ["新财富", "机会", "繁荣", "稳定"], description: "一只云中伸出的手托着一枚大星币，下方是盛开的花园。", upright: "一个新的事业或投资机会正在到来。这是扎实的、可持续的繁荣。", reversed: "机会可能流逝或需要重新审视财务规划。" },
+  { id: 65, name: "星币二", nameEn: "Two of Pentacles", type: "minor", suit: "pentacles", number: 2, keywords: ["平衡", "弹性", "适应", "多任务"], description: "一个人像变戏法一样同时操控两枚星币，背景是起伏的海浪。", upright: "你需要灵活地平衡多个任务或收支。保持幽默感和适应力。", reversed: "过度多任务导致失控，或者财务平衡已经打破。" },
+  { id: 66, name: "星币三", nameEn: "Three of Pentacles", type: "minor", suit: "pentacles", number: 3, keywords: ["合作", "技艺", "成长", "规划"], description: "一个雕刻师在教室内向两位观众展示他的工作成果。", upright: "团队合作和精湛技艺正在产出优秀的成果。你的努力被看到了。", reversed: "团队协作出现问题，或者对自身技艺缺乏信心。" },
+  { id: 67, name: "星币四", nameEn: "Four of Pentacles", type: "minor", suit: "pentacles", number: 4, keywords: ["守住", "节俭", "控制", "安全感"], description: "一个人死死抓住四枚星币——一枚在头顶，一枚在心口，两枚在脚下。", upright: "你在守住自己的资源——这很合理。但小心不要因为对安全的过度渴望而变得吝啬或封闭。", reversed: "开始放下对物质的执念，或者反过来——过度挥霍不顾后果。" },
+  { id: 68, name: "星币五", nameEn: "Five of Pentacles", type: "minor", suit: "pentacles", number: 5, keywords: ["匮乏", "孤立", "困难", "求助"], description: "两个衣衫褴褛的人在雪中蹒跚而行，旁边教堂的彩窗亮着温暖的光。", upright: "你可能在经历财务或精神上的匮乏期。但你并不孤单——看看旁边的教堂，那里有温暖和帮助。", reversed: "困境正在好转，或者你终于愿意接受他人的帮助。" },
+  { id: 69, name: "星币六", nameEn: "Six of Pentacles", type: "minor", suit: "pentacles", number: 6, keywords: ["施与受", "慷慨", "平衡", "感恩"], description: "一个商人手持天平将金币分给两个乞讨者。", upright: "你在施与受之间找到了平衡。慷慨地给予，也感恩地接受。", reversed: "给予与接受之间的失衡——要么过度付出，要么在利用别人的慷慨。" },
+  { id: 70, name: "星币七", nameEn: "Seven of Pentacles", type: "minor", suit: "pentacles", number: 7, keywords: ["评估", "等待", "投资", "耐心"], description: "一个人倚着锄杖，看着一株结了七枚星币的植物。", upright: "你的投资和努力正在成长——但还需要一些时间。评估进展，然后决定下一步。", reversed: "对成果感到失望，或者缺乏耐心想要中途放弃。" },
+  { id: 71, name: "星币八", nameEn: "Eight of Pentacles", type: "minor", suit: "pentacles", number: 8, keywords: ["精進", "专注", "磨炼", "细节"], description: "一个工匠正在专注地雕刻一枚又一枚的星币。", upright: "匠心精神——你正在通过反复练习和专注来精进技艺。这个阶段虽然单调，但扎实。", reversed: "陷入了单调的工作节奏，缺乏成长，或者对细节过于纠结。" },
+  { id: 72, name: "星币九", nameEn: "Nine of Pentacles", type: "minor", suit: "pentacles", number: 9, keywords: ["独立", "优雅", "成果", "自信"], description: "一位优雅的女子站在花园中，一只鸟停在她的手背，身后是九枚星币。", upright: "你通过自己的努力获得了独立和富足。享受这份优雅的自给自足。", reversed: "虽然物质独立但内心空虚，或者这份独立是建立在牺牲关系之上的。" },
+  { id: 73, name: "星币十", nameEn: "Ten of Pentacles", type: "minor", suit: "pentacles", number: 10, keywords: ["传承", "财富", "家族", "长久"], description: "三代同堂的富裕家庭场景——老人、夫妇、孩子和忠诚的狗。", upright: "不仅仅是金钱——而是长久的传承和家族的安全感。你建立的财富会传承下去。", reversed: "物质富裕但关系破裂，或者家族财产的纠纷。" },
+  { id: 74, name: "星币侍从", nameEn: "Page of Pentacles", type: "minor", suit: "pentacles", number: 11, keywords: ["学习", "踏实", "新技能", "勤奋"], description: "一个少年专注地凝视手中的星币。", upright: "一个踏实学习新技能的好时机。打好基础，未来的大厦才稳固。", reversed: "缺乏动力去学习，或者急功近利不愿意从基础开始。" },
+  { id: 75, name: "星币骑士", nameEn: "Knight of Pentacles", type: "minor", suit: "pentacles", number: 12, keywords: ["稳重", "坚持", "可靠", "务实"], description: "一位骑士骑在黑马上，静止不动，仔细端详手中的星币。", upright: "稳扎稳打是最快的速度。你做着最踏实、最可靠的努力。继续保持。", reversed: "过于保守导致停滞，或者对工作的执着变得死板。" },
+  { id: 76, name: "星币皇后", nameEn: "Queen of Pentacles", type: "minor", suit: "pentacles", number: 13, keywords: ["滋养", "务实", "丰足", "安全感"], description: "一位女王端坐花园中，怀抱一枚大星币，温柔地看着它。", upright: "你拥有让生活变得美好的实际能力。用你的温暖和务实去照顾自己与所爱的人。", reversed: "过度担心物质层面的问题而忽略了情感和精神的滋养。" },
+  { id: 77, name: "星币国王", nameEn: "King of Pentacles", type: "minor", suit: "pentacles", number: 14, keywords: ["繁荣", "踏实", "成就", "商业头脑"], description: "一位国王端坐，周围是葡萄藤、城堡和丰盛的象征。", upright: "你在物质世界中干得漂亮。你的务实和商业头脑已经为你带来了可靠的成果。", reversed: "过于沉迷物质财富，或者用金钱来衡量一切。" },
+];
+
+export const allCards: TarotCard[] = [...majorArcana, ...minorArcana];
+
+export function getCardById(id: number): TarotCard | undefined {
+  return allCards.find((c) => c.id === id);
+}
+
+export function getRandomCards(count: number): TarotCard[] {
+  const shuffled = [...allCards].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+export function getRandomCard(): TarotCard {
+  return allCards[Math.floor(Math.random() * allCards.length)];
+}
