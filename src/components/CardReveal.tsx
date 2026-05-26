@@ -99,13 +99,13 @@ export default function CardReveal({ card, isReversed }: CardRevealProps) {
 
             {/* Reversed indicator */}
             {isReversed && (
-              <div className="mt-1 px-2.5 py-0.5 rounded-full bg-[#ef4444]/10 border border-[#ef4444]/20">
-                <span className="text-[10px] text-[#ef4444]/80 tracking-wider">逆 位</span>
+              <div className="mt-1 px-3 py-1 rounded-full bg-[#ef4444]/10 border border-[#ef4444]/20 flex items-center justify-center min-w-[48px]">
+                <span className="text-[10px] text-[#ef4444]/80 tracking-wider text-center">逆位</span>
               </div>
             )}
             {!isReversed && (
-              <div className="mt-1 px-2.5 py-0.5 rounded-full bg-[#d4a853]/10 border border-[#d4a853]/20">
-                <span className="text-[10px] text-[#d4a853]/70 tracking-wider">正 位</span>
+              <div className="mt-1 px-3 py-1 rounded-full bg-[#d4a853]/10 border border-[#d4a853]/20 flex items-center justify-center min-w-[48px]">
+                <span className="text-[10px] text-[#d4a853]/70 tracking-wider text-center">正位</span>
               </div>
             )}
           </div>

@@ -103,6 +103,85 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* === Mystical Atmosphere Animations === */
+
+@keyframes breath-glow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.08), 0 0 60px rgba(180, 130, 60, 0.04);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(212, 168, 83, 0.18), 0 0 90px rgba(200, 150, 70, 0.08);
+  }
+}
+
+@keyframes ritual-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ritual-fade {
+  from { opacity: 0; letter-spacing: 0.3em; }
+  to { opacity: 1; letter-spacing: 0.15em; }
+}
+
+@keyframes symbol-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(180, 140, 60, 0.15); }
+  50% { border-color: rgba(212, 168, 83, 0.35); }
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-12px) scale(1.05); opacity: 0.8; }
+}
+
+@keyframes line-extend {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-breath-glow {
+  animation: breath-glow 5s ease-in-out infinite;
+}
+
+.animate-ritual-rise {
+  animation: ritual-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-ritual-fade {
+  animation: ritual-fade 1.2s ease-out both;
+}
+
+.animate-border-glow {
+  animation: border-glow 4s ease-in-out infinite;
+}
+
+.animate-line-extend {
+  animation: line-extend 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center;
+}
+
+/* Staggered ritual entrance */
+.ritual-entrance > * {
+  opacity: 0;
+  animation: ritual-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.ritual-entrance > *:nth-child(1) { animation-delay: 0.15s; }
+.ritual-entrance > *:nth-child(2) { animation-delay: 0.35s; }
+.ritual-entrance > *:nth-child(3) { animation-delay: 0.55s; }
+.ritual-entrance > *:nth-child(4) { animation-delay: 0.75s; }
+.ritual-entrance > *:nth-child(5) { animation-delay: 0.95s; }
+
 .animate-fade-up {
   animation: fade-up 0.7s ease-out both;
 }
@@ -148,6 +227,51 @@ body {
 .stagger > *:nth-child(5) { animation-delay: 0.4s; }
 .stagger > *:nth-child(6) { animation-delay: 0.5s; }
 .stagger > *:nth-child(7) { animation-delay: 0.6s; }
+
+/* Modal animations */
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(32px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes modal-exit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(24px) scale(0.94); }
+}
+
+.animate-modal-enter {
+  animation: modal-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-modal-exit {
+  animation: modal-exit 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Meteor comet — loading screen */
+@keyframes meteor-shoot {
+  0%   { transform: translateX(-350px); opacity: 0; }
+  4%   { opacity: 1; }
+  22%  { transform: translateX(calc(100vw + 350px)); opacity: 0.5; }
+  26%  { transform: translateX(calc(100vw + 350px)); opacity: 0; }
+  100% { transform: translateX(calc(100vw + 350px)); opacity: 0; }
+}
+
+.animate-meteor-1 { animation: meteor-shoot 2.6s linear 0s infinite; }
+.animate-meteor-2 { animation: meteor-shoot 3.2s linear 1.3s infinite; }
+.animate-meteor-3 { animation: meteor-shoot 2.9s linear 2.2s infinite; }
+.animate-meteor-4 { animation: meteor-shoot 3.5s linear 0.6s infinite; }
+.animate-meteor-5 { animation: meteor-shoot 3.8s linear 1.9s infinite; }
+
+.meteor-head {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  filter: blur(0.5px);
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }

@@ -1,5 +1,15 @@
 "use client";
 
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^[-*+]\s+/gm, "")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/~~(.+?)~~/g, "$1");
+}
+
 interface ReadingTextProps {
   text: string;
   loading: boolean;
@@ -37,7 +47,9 @@ export default function ReadingText({ text, loading }: ReadingTextProps) {
 
   if (!text) return null;
 
-  const paragraphs = text.split(/\n\n+/).filter((s) => s.trim());
+  const cleanText = stripMarkdown(text);
+
+  const paragraphs = cleanText.split(/\n\n+/).filter((s) => s.trim());
   if (paragraphs.length === 0) return null;
 
   return (
